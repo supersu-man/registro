@@ -1,7 +1,6 @@
 <div class="d-flex flex-column p-5">
     <zxing-scanner class="mx-auto" [formats]="allowedFormats" (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
     <div class="mx-auto ">
-        <button class="btn btn-light m-4" (click)="test()">Test button</button>
         <button class="btn btn-light m-4" [routerLink]="'/dashboard'">Dashboard</button>
     </div>
 </div>

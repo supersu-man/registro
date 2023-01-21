@@ -36,7 +36,6 @@ export class DashboardComponent implements OnInit {
         if (res.data.epass) this.uiData.eventpass = res.data.epass
         this.uiData.fullname = res.data.fullname
         this.uiData.firstname = res.data.fullname.split(' ')[0]
-        console.log(res)
       } else {
         console.log(res.message)
       }
