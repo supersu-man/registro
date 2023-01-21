@@ -1,0 +1,20 @@
+input {
+    background-color: #A876D1 !important;
+    color: white !important;
+    border-width: 0px;
+    border-radius: 0px;
+    box-shadow: none !important;
+    max-width: 400px;
+    height: 45px;
+}
+
+button {
+    border-radius: 15px;
+    width: 250px;
+    background-color: #5B3579 !important;
+    color: white !important;
+}
+
+button:hover {
+    filter: brightness(110%);
+}

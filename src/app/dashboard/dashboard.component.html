@@ -1,0 +1,29 @@
+<div class="d-flex flex-column text-center h-100 px-4 pb-5">
+    <div class="d-flex m-3">
+        <label class="fs-3 me-auto">Welcome {{uiData.firstname}}</label>
+        <img class="ms-auto my-auto" src="assets/imgs/logout1.png" height="30" width="30" (click)="logout()"
+            style="cursor: pointer;">
+    </div>
+    <label >{{uiData.time}}</label>
+    <label *ngIf="uiData.dev">Dev Account</label>
+
+    <div class="fair-card d-flex flex-column mt-3 p-3">
+        <label class="me-auto mb-0 fs-3 text-black">Event Pass</label>
+        <qr-code class="m-auto" [value]="uiData.eventpass" size="220" errorCorrectionLevel="M"
+            lightColor="#B67FE3"></qr-code>
+    </div>
+
+    <div class="d-flex">
+        <div class="rounded-circle d-flex mx-auto p-2 mt-3" style="cursor: pointer; background-color: #AF78DC;"
+            [routerLink]="'/scan'">
+            <img class="m-auto pt-1" src="assets/imgs/scan.png" height="50" width="50">
+        </div>
+        <div class="rounded-circle d-flex mx-auto p-2 mt-3" style="cursor: pointer; background-color: #AF78DC;"
+            [routerLink]="'/register'">
+            <img class="m-auto pt-1" src="assets/imgs/tickets.png" height="50" width="50">
+        </div>
+    </div>
+
+    <label class="mt-auto">App brought to you by</label>
+    <label class="fw-bold">GITHUB COMMUNITY GITAM</label>
+</div>
