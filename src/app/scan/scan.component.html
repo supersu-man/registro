@@ -1,6 +1,7 @@
-<div class="d-flex flex-column p-5">
+<div class="d-flex flex-column p-5 h-100">
     <zxing-scanner class="mx-auto" [formats]="allowedFormats" (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
-    <div class="mx-auto ">
+    <div *ngIf="spinner" class="spinner-border spinner-border-sm mx-auto"></div>
+    <div class="mx-auto mt-auto">
         <button class="btn btn-light m-4" [routerLink]="'/dashboard'">Dashboard</button>
     </div>
 </div>

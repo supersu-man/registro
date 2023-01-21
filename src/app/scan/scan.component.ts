@@ -8,28 +8,31 @@ import { environment } from 'src/environments/environment';
   templateUrl: './scan.component.html',
   styleUrls: ['./scan.component.scss']
 })
-export class ScanComponent implements OnInit {
+export class ScanComponent {
   allowedFormats = [BarcodeFormat.QR_CODE]
+  spinner = false
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void {
-  }
+
 
   scanSuccessHandler(qr: string) {
+    this.spinner = true
+    if(!qr.startsWith('eyJ1c2Vybm')){
+      this.spinner = false
+      alert('Invalid E-Pass')
+      return
+    }
     const body = {
-      auth: localStorage.getItem('auth'),
-      data: qr
+      auth: qr
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
       next: (res: any) => {
-        if (res.error) {
-          alert(res.message)
-        } else {
-          alert('Transfer success')
-        }
+        this.spinner = false
+        alert(res.message)
       },
       error: (err) => {
+        this.spinner = false
         alert('Error has occured')
       }
     })
