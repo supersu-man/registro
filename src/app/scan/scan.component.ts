@@ -9,8 +9,10 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./scan.component.scss']
 })
 export class ScanComponent {
+
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
+  checkin = true
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,7 +26,8 @@ export class ScanComponent {
       return
     }
     const body = {
-      auth: qr
+      auth: qr,
+      checkin: this.checkin
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
       next: (res: any) => {
