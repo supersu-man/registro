@@ -3,38 +3,22 @@
     src: url(assets/Rubik.ttf);
 }
 
-@font-face {
-    font-family: Synthek;
-    src: url(assets/Synthek.ttf);
-}
-
 html,
 body {
     height: 100%;
     margin: 0px;
     padding: 0px;
-    overflow-y: auto;
     font-family: 'Rubik';
-    background: linear-gradient(180deg, #301447 0%, rgba(105, 33, 163, 0.59) 100%);
+    background: rgb(32, 32, 32);
     color: white;
 }
 
-.synthek {
-    font-family: 'Synthek';
+input {
+    max-width: 300px;
+    box-shadow: none !important;
+    border: none !important;
 }
 
-.bg-bg {
-    background: linear-gradient(180deg, #301447 0%, rgba(105, 33, 163, 0.59) 100%);
-}
-
-.bg-accent {
-    background-color: #63E6E2;
-}
-
-.text-accent {
-    color: #63E6E2;
-}
-
-.br-15 {
-    border-radius: 15px;
+.cp {
+    cursor: pointer;
 }

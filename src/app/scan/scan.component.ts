@@ -13,33 +13,30 @@ export class ScanComponent {
   allowedFormats = [BarcodeFormat.QR_CODE]
   spinner = false
   checkin = true
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
 
   constructor(private httpClient: HttpClient) { }
 
-
-
   scanSuccessHandler(qr: string) {
     this.spinner = true
-    if(!qr.startsWith('eyJ1c2Vybm')){
-      this.spinner = false
-      alert('Invalid E-Pass')
-      return
-    }
     const body = {
-      auth: qr,
-      checkin: this.checkin
+      qr: qr,
+      checkin: this.checkin,
+      username: this.userdata.username,
+      password: this.userdata.password
     }
     this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
       next: (res: any) => {
         this.spinner = false
         alert(res.message)
       },
-      error: (err) => {
+      error: (e) => {
         this.spinner = false
-        alert('Error has occured')
+        alert(e.error)
       }
     })
   }
+
 }
 
 

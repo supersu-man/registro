@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import * as config from 'src/config'
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
   spinner = false
+  config = config
 
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -24,31 +26,23 @@ export class LoginComponent implements OnInit {
   login() {
     if (!this.formData.valid) return
     this.spinner = true
-    const username = this.formData.controls.username.value as string
-    const password = this.formData.controls.password.value as string
+    const username = this.formData.controls.username.value?.toLowerCase()
+    const password = this.formData.controls.password.value?.toString()
     this.httpClient.post(environment.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
       next: (res: any) => {
-        if (res.error == false) {
-          localStorage.setItem('auth', res.data)
-          this.router.navigate(['dashboard'])
-        } else {
-          alert(res.message)
-        }
+        localStorage.setItem('userdata', JSON.stringify(res))
+        this.router.navigate(['dashboard'])
         this.spinner = false
       },
       error: (e) => {
-        alert('Error occured')
+        alert(e.error)
         this.spinner = false
       }
     })
   }
 
-  open(s: string) {
-    if (s == 'instagram') {
-      window.open('https://www.instagram.com/github.gitam/')
-    } else if (s == 'epoch') {
-      window.open('https://github-community-gitam.github.io/epoch/')
-    }
+  open() {
+    window.open('https://www.instagram.com/github.gitam/')
   }
 
 }

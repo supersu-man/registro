@@ -11,18 +11,24 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (state.url == '') 
+    if (state.url == '')
       return true
 
-    if (localStorage.getItem('auth')) {
+    const userdata = JSON.parse(localStorage.getItem('userdata')!)
+
+    if (userdata) {
       if (state.url == '/login') {
         this.router.navigate(['dashboard'])
         return false
       }
+      if (!userdata.dev && state.url == '/register') {
+        this.router.navigate(['dashboard'])
+        return false
+      }
       return true
-    }
-
-    if (!localStorage.getItem('auth')) {
+    } 
+    
+    else {
       if (state.url != '/login') {
         this.router.navigate(['login'])
         return false
@@ -30,6 +36,5 @@ export class AuthGuard implements CanActivate {
       return true
     }
 
-    return false
   }
 }

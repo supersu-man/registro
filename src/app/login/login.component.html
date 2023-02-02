@@ -1,14 +1,17 @@
-<div class="d-flex flex-column text-center h-100 p-5" [formGroup]="formData">
-    <label class="fs-2">Parichay</label>
-    <label>presents</label>
-    <label class="display-1 my-4">Retro <br> &nbsp; &nbsp; Night</label>
-    <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="username">
-    <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
-    <small class="my-2">Note: Use GITAM student portal credentials.</small>
-    <button class="btn btn-info my-3 fw-bold mx-auto border-0 mb-auto" (click)="login()">
-        <div *ngIf="!spinner">Sign In</div>
-        <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
-    </button>
-    <label class="">App brought to you by</label>
-    <label class="fw-bold">GITHUB COMMUNITY GITAM</label>
+<div class="container h-100">
+    <div class="d-flex flex-column text-center h-100 py-5" [formGroup]="formData">
+        <label class="fs-2">{{config.clubName}}</label>
+        <label>presents</label>
+        <label class="display-2 mt-2">{{config.eventTitle1}}</label>
+        <label class="display-2">{{config.eventTitle2}}</label>
+        <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="username">
+        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
+        <small class="my-2">Note: Use GITAM student portal credentials.</small>
+        <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" (click)="login()">
+            <div *ngIf="!spinner">Sign In</div>
+            <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
+        </button>
+        <label class="mt-auto">App brought to you by</label>
+        <label class="fw-bold cp" (click)="open()">GITHUB COMMUNITY GITAM</label>
+    </div>
 </div>

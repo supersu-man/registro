@@ -1,32 +1,12 @@
 <div class="container h-100">
-    <div class="row h-100">
-        <div class="col-lg h-100">
-            <div class="d-flex flex-column text-center py-5 h-100">
-                <label class="fs-2">Parichay</label>
-                <label>presents</label>
-                <label class="display-3 mt-2 mb-auto">Retro <br> &nbsp; &nbsp; Night</label>
-                <img class="img-fluid mb-auto" src="assets/imgs/phone.png" width="500" style="margin-top: -200px;">
-                <label class="mt-auto">App brought to you by</label>
-                <label class="fw-bold">GITHUB COMMUNITY GITAM</label>
-            </div>
-        </div>
-        <div class="col-md h-100">
-            <div class="d-flex flex-column text-center py-5 h-100">
-                <label class="fs-4">
-                    "Parichay" - an Ethnic Day, after four years of silence on campus, consists of a Retro Music Night
-                    where a three-piece musical band "Purani Jeans" shall play soothing retro songs to which students
-                    would vibe to.
-                </label>
-                <label class="mt-auto pt-5">Brought to you by</label>
-                <div class="mb-auto">
-                    <img src="assets/imgs/vastranova.png" height="120">
-                    <img src="assets/imgs/pac.png" height="80">
-                    <img src="assets/imgs/gstudio.png" height="100">
-                    <img src="assets/imgs/kalakrithi.png">
-                    <img src="assets/imgs/pj.png" height="120">
-                </div>
-                <button class="btn my-3 fw-bold border-0 mx-auto" (click)="goToLogin()">Login</button>
-            </div>
-        </div>
+    <div class="d-flex flex-column text-center h-100 py-5">
+        <label class="fs-2">{{config.clubName}}</label>
+        <label>presents</label>
+        <label class="display-3 mt-2">{{config.eventTitle1}}</label>
+        <label class="display-3">{{config.eventTitle2}}</label>
+        <label class="fs-4 my-auto px-5">{{config.eventDescription}}</label>
+        <button class="btn btn-light fw-bold border-0 m-auto px-4" routerLink="/login">Login</button>
+        <label>App brought to you by</label>
+        <label class="fw-bold cp" (click)="open()">GITHUB COMMUNITY GITAM</label>
     </div>
 </div>

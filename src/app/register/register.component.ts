@@ -1,16 +1,19 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import * as config from 'src/config'
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   spinner = false
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
+  config = config
 
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
@@ -18,33 +21,31 @@ export class RegisterComponent implements OnInit {
   })
 
   constructor(private httpClient: HttpClient, private router: Router) { }
-  
-  ngOnInit(): void {
-  }
 
   register() {
     if (!this.formData.valid) return
     this.spinner = true
     const data = {
-      auth: localStorage.getItem('auth'),
-      s_username: this.formData.controls.username.value as string,
-      s_password: this.formData.controls.password.value as string,
+      username: this.userdata.username,
+      password: this.userdata.password,
+      s_username: this.formData.controls.username.value?.toLowerCase(),
+      s_password: this.formData.controls.password.value?.toString(),
     }
     this.httpClient.post(environment.endpoint + '/register', data).subscribe({
       next: (res: any) => {
-        if (!res.error) {
-          alert('Registration successful')
-          this.router.navigate(['dashboard'])
-        } else {
-          alert(res.message)
-        }
+        alert('Registration successful')
         this.spinner = false
+        this.router.navigate(['dashboard'])
       },
       error: (e) => {
-        alert('Error occured')
+        alert(e.error)
         this.spinner = false
       }
     })
+  }
+
+  open() {
+    window.open('https://www.instagram.com/github.gitam/')
   }
 
 

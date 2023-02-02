@@ -1,20 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import * as config from 'src/config'
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void {
+export class HomeComponent {
+  config = config
+  open() {
+    window.open('https://www.instagram.com/github.gitam/')
   }
-
-  goToLogin() {
-    this.router.navigate(['/login'])
-  }
-
 }

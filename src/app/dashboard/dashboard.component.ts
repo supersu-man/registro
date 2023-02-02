@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,45 +9,25 @@ import { environment } from 'src/environments/environment';
 })
 export class DashboardComponent implements OnInit {
 
-  uiData = {
-    fullname: '',
-    regnumber: '',
-    firstname: '',
-    eventpass: '',
-    spinner: false,
-    time: '',
-    dev: false
-  }
+  spinner = false
+  time = ''
 
-  constructor(private router: Router, private httpClient: HttpClient, private activatedRoute: ActivatedRoute) { }
+  userdata = JSON.parse(localStorage.getItem('userdata')!)
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    this.getUserData()
     setInterval(() => {
-      this.uiData.time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+      this.time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
     }, 1000)
   }
 
-  getUserData() {
-    this.httpClient.post(environment.endpoint + '/get-user-data', { auth: localStorage.getItem('auth') }).subscribe((res: any) => {
-      if (!res.error) {
-        if(res.dev) this.uiData.dev = true
-        if (res.data.epass) this.uiData.eventpass = res.data.epass
-        this.uiData.fullname = res.data.fullname
-        this.uiData.firstname = res.data.fullname.split(' ')[0]
-      } else {
-        console.log(res.message)
-      }
-    })
+  open() {
+    window.open('https://www.instagram.com/github.gitam/')
   }
-
-  goToScan() {
-    this.router.navigate(['scan'])
-  }
-
 
   logout() {
-    localStorage.removeItem('auth')
+    localStorage.removeItem('userdata')
     this.router.navigate(['login'])
   }
 
