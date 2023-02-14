@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import * as config from 'src/config'
 
 @Component({
@@ -28,7 +27,7 @@ export class LoginComponent implements OnInit {
     this.spinner = true
     const username = this.formData.controls.username.value?.toLowerCase()
     const password = this.formData.controls.password.value?.toString()
-    this.httpClient.post(environment.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
+    this.httpClient.post(config.endpoint + '/login', { 'username': username, 'password': password }).subscribe({
       next: (res: any) => {
         localStorage.setItem('userdata', JSON.stringify(res))
         this.router.navigate(['dashboard'])

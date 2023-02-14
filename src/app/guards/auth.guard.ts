@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +20,7 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['dashboard'])
         return false
       }
-      if (!userdata.dev && state.url == '/register') {
+      if (!userdata.dev && (state.url == '/scan' || state.url == '/register' || state.url == '/registrations')) {
         this.router.navigate(['dashboard'])
         return false
       }

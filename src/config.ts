@@ -1,5 +1,6 @@
 'use strict'
 
+export const endpoint = "https://register-easy.supersum4n.repl.co"
 export const clubName = "[Club Name]"
 export const eventTitle1 = "[Event"
 export const eventTitle2 = "Title]"

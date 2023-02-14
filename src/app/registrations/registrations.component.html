@@ -1,0 +1,20 @@
+<div class="container h-100">
+    <div class="d-flex flex-column h-100 py-5">
+        <label class="fs-2">Registrations</label>
+        <input class="form-control bg-accent my-2" type="text" placeholder="Search" [(ngModel)]="searchKey"
+            style="height: 40px;">
+
+        <div class="d-flex flex-column" *ngFor="let item of data | keyvalue">
+            <div class="d-flex flex-column card bg-accent my-2 p-4 text-black"
+                *ngIf="(item.value['reg'] | lowercase).includes(searchKey | lowercase) || (item.value['fullname'] | lowercase).includes(searchKey | lowercase)">
+                <label>Reg: {{ item.value['reg'] }}</label>
+                <label>Fullname: {{ item.value['fullname'] }}</label>
+                <label>Dev: {{ item.value['dev'] }}</label>
+            </div>
+        </div>
+
+        <div class="d-flex">
+            <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+        </div>
+    </div>
+</div>

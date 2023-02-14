@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
-import { environment } from 'src/environments/environment';
+import * as config from 'src/config'
 
 @Component({
   selector: 'app-scan',
@@ -25,7 +25,7 @@ export class ScanComponent {
       username: this.userdata.username,
       password: this.userdata.password
     }
-    this.httpClient.post(environment.endpoint + '/scan', body).subscribe({
+    this.httpClient.post(config.endpoint + '/scan', body).subscribe({
       next: (res: any) => {
         this.spinner = false
         alert(res.message)

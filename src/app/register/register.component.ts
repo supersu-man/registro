@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import * as config from 'src/config'
 
 @Component({
@@ -31,7 +30,7 @@ export class RegisterComponent {
       s_username: this.formData.controls.username.value?.toLowerCase(),
       s_password: this.formData.controls.password.value?.toString(),
     }
-    this.httpClient.post(environment.endpoint + '/register', data).subscribe({
+    this.httpClient.post(config.endpoint + '/register', data).subscribe({
       next: (res: any) => {
         alert('Registration successful')
         this.spinner = false
