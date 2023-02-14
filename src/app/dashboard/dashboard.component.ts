@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,10 +19,6 @@ export class DashboardComponent implements OnInit {
     setInterval(() => {
       this.time = new Date().toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
     }, 1000)
-  }
-
-  open() {
-    window.open('https://www.instagram.com/github.gitam/')
   }
 
   logout() {

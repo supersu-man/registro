@@ -8,7 +8,4 @@ import * as config from 'src/config'
 })
 export class HomeComponent {
   config = config
-  open() {
-    window.open('https://www.instagram.com/github.gitam/')
-  }
 }

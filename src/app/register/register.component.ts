@@ -44,9 +44,5 @@ export class RegisterComponent {
     })
   }
 
-  open() {
-    window.open('https://www.instagram.com/github.gitam/')
-  }
-
 
 }

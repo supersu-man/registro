@@ -41,8 +41,6 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  open() {
-    window.open('https://www.instagram.com/github.gitam/')
-  }
+ 
 
 }
