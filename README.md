@@ -17,3 +17,4 @@ Register easy is an open source regrations web app made specifically for GITAM w
 
     `git push`
 - Change `dev_accounts` and `domain` variables in `index.js` in your forked repl.
+- Add a secret to your repl with key `ENCRYPTION_KEY` and your own value.
