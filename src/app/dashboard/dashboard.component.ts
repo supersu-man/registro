@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,12 +9,13 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit {
 
-  spinner = false
+  loading = true
   time = ''
 
-  userdata = JSON.parse(localStorage.getItem('userdata')!)
+  userdata = this.commonService.userData
+  eventData = this.commonService.eventData
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private commonService: CommonService) { }
 
   ngOnInit(): void {
     setInterval(() => {
@@ -23,7 +25,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('userdata')
-    this.router.navigate(['login'])
+    this.router.navigate([this.eventData.name+'/login'])
   }
 
 }

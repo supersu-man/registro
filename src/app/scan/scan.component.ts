@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { BarcodeFormat } from '@zxing/library';
-import * as config from 'src/config'
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-scan',
@@ -11,30 +10,22 @@ import * as config from 'src/config'
 export class ScanComponent {
 
   allowedFormats = [BarcodeFormat.QR_CODE]
-  spinner = false
-  checkin = true
-  userdata = JSON.parse(localStorage.getItem('userdata')!)
+  userdata = this.commonService.userData
+  eventData = this.commonService.eventData
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private commonService: CommonService) { }
 
   scanSuccessHandler(qr: string) {
-    this.spinner = true
-    const body = {
-      qr: qr,
-      checkin: this.checkin,
-      username: this.userdata.username,
-      password: this.userdata.password
+    if (!qr.includes('|')) {
+      alert('Invalid QR')
+      return
+    } else if (qr.split('|')[0] != this.eventData.name) {
+      alert('Mismatched events')
+      return
     }
-    this.httpClient.post(config.endpoint + '/scan', body).subscribe({
-      next: (res: any) => {
-        this.spinner = false
-        alert(res.message)
-      },
-      error: (e) => {
-        this.spinner = false
-        alert(e.error)
-      }
-    })
+    const reg = qr.split('|')[1]
+    if (this.eventData.reg.includes(reg)) alert('Registerd')
+    else alert('Not register for the event')
   }
 
 }

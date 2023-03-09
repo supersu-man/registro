@@ -1,0 +1,45 @@
+<div class="container h-100">
+    <div class="d-flex flex-column h-100 py-5" [formGroup]="formData">
+        <label class="fs-1 mb-3">Add a new event</label>
+        <div class="fs-4">Event Name: </div>
+        <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="name">
+        <div class="fs-4">Event Description: </div>
+        <textarea class="fs-5 mb-3" type="text" maxlength="80" style="min-height: 100px;"
+            formControlName="desc"> </textarea>
+        <div class="fs-4">Club name: </div>
+        <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="club_name">
+        <label class="fs-4">Stall accounts:</label>
+        <div class="mb-1">
+            <button class="btn btn-light m-1" *ngFor="let account of stall; let i = index"
+                (click)="stall.splice(i, 1)">{{account}}</button>
+        </div>
+        <input class="fs-5" type="text" (keyup.Space)="add_account($event.target)" style="text-transform: lowercase;">
+        <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Add Event</button>
+        <label class="text-center mt-auto">App brought to you by</label>
+        <a class="fw-bold text-center" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: rgb(32, 32, 32);">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Admin Authentication</h5>
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body" [formGroup]="formData">
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="Username" formControlName="username"
+                    style="text-transform: lowercase;">
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="Password" formControlName="password">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="add_event()">
+                    <div *ngIf="!spinner">Add Event</div>
+                    <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

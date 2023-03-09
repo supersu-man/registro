@@ -13,10 +13,13 @@ body {
     color: white;
 }
 
-input {
+input, textarea {
     max-width: 300px;
     box-shadow: none !important;
     border: none !important;
+    border-radius: 10px;
+    height: 35px;
+    padding: 8px;
 }
 
 a {

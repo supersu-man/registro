@@ -1,1 +1,4 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="eventData"></router-outlet>
+<div class="h-100 d-flex" *ngIf="!eventData">
+    <div class="m-auto spinner-border spinner-border-sm"></div>
+</div>

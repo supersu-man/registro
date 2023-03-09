@@ -13,6 +13,8 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { QrCodeModule } from 'ng-qrcode';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
+import { AddEventComponent } from './add-event/add-event.component';
+import { EventsComponent } from './events/events.component';
 
 
 @NgModule({
@@ -23,7 +25,9 @@ import { RegistrationsComponent } from './registrations/registrations.component'
     HomeComponent,
     ScanComponent,
     RegisterComponent,
-    RegistrationsComponent
+    RegistrationsComponent,
+    AddEventComponent,
+    EventsComponent
   ],
   imports: [
     BrowserModule,

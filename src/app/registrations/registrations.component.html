@@ -1,20 +1,30 @@
 <div class="container h-100">
     <div class="d-flex flex-column h-100 py-5">
-        <label class="fs-2">Registrations</label>
+        <label class="text-center fs-2">{{eventData.club_name}}</label>
+        <label class="text-center my-1">presents</label>
+        <label class="text-center fs-2 mb-4">{{eventData.name}}</label>
         <input class="form-control bg-accent my-2" type="text" placeholder="Search" [(ngModel)]="searchKey"
             style="height: 40px;">
+        <label class="fs-2">Stall Accounts</label>
 
-        <div class="d-flex flex-column" *ngFor="let item of data | keyvalue">
-            <div class="d-flex flex-column card bg-accent my-2 p-4 text-black"
-                *ngIf="(item.value['reg'] | lowercase).includes(searchKey | lowercase) || (item.value['fullname'] | lowercase).includes(searchKey | lowercase)">
-                <label>Reg: {{ item.value['reg'] }}</label>
-                <label>Fullname: {{ item.value['fullname'] }}</label>
-                <label>Dev: {{ item.value['dev'] }}</label>
+        <div class="d-flex flex-column" *ngFor="let item of stall">
+            <div class="d-flex flex-column card bg-accent my-2 p-3 text-black"
+                *ngIf="item.includes(searchKey | lowercase)">
+                <label>{{ item }}</label>
+            </div>
+        </div>
+
+        <label class="fs-2">Registrations</label>
+
+        <div class="d-flex flex-column" *ngFor="let item of reg">
+            <div class="d-flex flex-column card bg-accent my-2 p-3 text-black"
+                *ngIf="item.includes(searchKey | lowercase)">
+                <label>{{ item }}</label>
             </div>
         </div>
 
         <div class="d-flex">
-            <div *ngIf="!data" class="spinner-border spinner-border-sm m-auto"></div>
+            <div *ngIf="!reg" class="spinner-border spinner-border-sm m-auto"></div>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import * as config from 'src/config'
+import { CommonService } from '../services/common.service';
 
 @Component({
   selector: 'app-registrations',
@@ -9,17 +10,19 @@ import * as config from 'src/config'
 })
 export class RegistrationsComponent implements OnInit {
 
-  data: undefined
+  reg: any
+  stall: any
   searchKey = ''
 
-  userdata = JSON.parse(localStorage.getItem('userdata')!)
+  eventData = this.commonService.eventData
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
   ngOnInit() {
-    this.httpClient.post(`${config.endpoint}/registrations`, { username: this.userdata.username, password: this.userdata.password }).subscribe({
+    this.httpClient.post(`${config.endpoint}/registrations`, { event: this.eventData.name }).subscribe({
       next: (res: any) => {
-        this.data = res
+        this.reg = res.reg
+        this.stall = res.stall
       },
       error: (err) => {
         alert(err.error)

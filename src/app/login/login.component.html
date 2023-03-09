@@ -1,10 +1,10 @@
-<div class="container h-100">
+<div class="container h-100" >
     <div class="d-flex flex-column text-center h-100 py-5" [formGroup]="formData">
-        <label class="fs-2">{{config.clubName}}</label>
-        <label>presents</label>
-        <label class="display-2 mt-2">{{config.eventTitle1}}</label>
-        <label class="display-2">{{config.eventTitle2}}</label>
-        <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="username">
+        <label class="display-4 mb-2">Login</label>
+        <label class="fs-2">{{eventData.club_name}}</label>
+        <label class="my-1">presents</label>
+        <label class="fs-2 mb-4">{{eventData.name}}</label>
+        <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="username" style="text-transform: lowercase;">
         <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
         <small class="my-2">Note: Use GITAM student portal credentials.</small>
         <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" (click)="login()">

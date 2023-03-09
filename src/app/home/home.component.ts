@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import * as config from 'src/config'
 
@@ -6,6 +7,4 @@ import * as config from 'src/config'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
-  config = config
-}
+export class HomeComponent { }

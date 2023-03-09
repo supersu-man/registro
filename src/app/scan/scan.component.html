@@ -1,15 +1,11 @@
 <div class="d-flex flex-column p-5 h-100 text-center">
+    <label class="display-4 mb-2">Scan</label>
+        <label class="fs-2">{{eventData.club_name}}</label>
+        <label class="my-1">presents</label>
+        <label class="fs-2 mb-4">{{eventData.name}}</label>
     <div class="d-flex mx-auto" style="height: 250px; width: 250px;">
-        <zxing-scanner *ngIf="!spinner" class="mx-auto" [formats]="allowedFormats"
+        <zxing-scanner class="mx-auto" [formats]="allowedFormats"
             (scanSuccess)="scanSuccessHandler($event)"></zxing-scanner>
-        <div class="m-auto">
-            <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
-        </div>
-    </div>
-    <div class="form-check form-switch mx-auto my-5">
-        <input class="form-check-input" type="checkbox" role="switch" [(ngModel)]="checkin">
-        <label class="form-check-label" *ngIf="checkin">Check in</label>
-        <label class="form-check-label" *ngIf="!checkin">Check out</label>
     </div>
     <label class="mt-auto">App brought to you by</label>
     <a class="fw-bold" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>

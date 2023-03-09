@@ -1,0 +1,11 @@
+<div class="container h-100" >
+    <div class="d-flex flex-column h-100 py-5">
+        <a class="card bg-secondary p-3 my-2" *ngFor="let event of events | keyvalue" [href]="event.key+'/login'">
+            <div class="fs-5">{{event.key}}</div>
+            <div >{{event.value.desc}}</div>
+            <div >by {{event.value.club_name}}</div>
+        </a>
+        <label class="mt-auto text-center">App brought to you by</label>
+        <a class="fw-bold text-center" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>
+    </div>
+</div>

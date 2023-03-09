@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AddEventComponent } from './add-event/add-event.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { EventsComponent } from './events/events.component';
 import { AuthGuard } from './guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -10,11 +12,13 @@ import { ScanComponent } from './scan/scan.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
-  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'scan', component: ScanComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'registrations', component: RegistrationsComponent, canActivate: [AuthGuard] }
+  { path: 'add-event', component: AddEventComponent },
+  { path: 'events', component: EventsComponent },
+  { path: ':event/login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: ':event/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: ':event/scan', component: ScanComponent, canActivate: [AuthGuard] },
+  { path: ':event/register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: ':event/registrations', component: RegistrationsComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
