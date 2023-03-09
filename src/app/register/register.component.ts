@@ -12,12 +12,14 @@ import { CommonService } from '../services/common.service';
 })
 export class RegisterComponent {
   spinner = false
-  userdata = this.commonService.eventData
+  userdata = this.commonService.userData
   eventData = this.commonService.eventData
 
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
+    stall: new FormControl(this.userdata?.username, Validators.required),
+    event: new FormControl(this.eventData?.name, Validators.required)
   })
 
   constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
@@ -25,13 +27,7 @@ export class RegisterComponent {
   register() {
     if (!this.formData.valid) return
     this.spinner = true
-    const data = {
-      stall: this.userdata.username,
-      username: this.formData.controls.username.value,
-      password: this.formData.controls.password.value,
-      event: this.eventData.name
-    }
-    this.httpClient.post(config.endpoint + '/register', data).subscribe({
+    this.httpClient.post(config.endpoint + '/register', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
         alert('Registration successful')
         this.spinner = false

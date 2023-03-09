@@ -18,12 +18,12 @@ export class LoginComponent {
   formData = new FormGroup({
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    event: new FormControl(this.eventData.name, Validators.required)
+    event: new FormControl(this.eventData?.name, Validators.required)
   })
 
   constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
 
-  login() {
+  login() {    
     if (!this.formData.valid) return
     this.spinner = true
     this.httpClient.post(config.endpoint + '/login', this.formData.getRawValue()).subscribe({
