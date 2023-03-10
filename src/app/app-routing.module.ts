@@ -11,7 +11,8 @@ import { RegistrationsComponent } from './registrations/registrations.component'
 import { ScanComponent } from './scan/scan.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', redirectTo: 'events', pathMatch: 'full' },
+  { path: 'about', component: HomeComponent },
   { path: 'add-event', component: AddEventComponent },
   { path: 'events', component: EventsComponent },
   { path: ':event/login', component: LoginComponent, canActivate: [AuthGuard] },

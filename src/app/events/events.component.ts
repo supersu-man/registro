@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import * as config from 'src/config'
 
 @Component({
@@ -7,12 +7,21 @@ import * as config from 'src/config'
   templateUrl: './events.component.html',
   styleUrls: ['./events.component.scss']
 })
-export class EventsComponent {
+export class EventsComponent implements OnInit {
   events: undefined
-  constructor(private httpClient: HttpClient) {
+  spinner = true
+  constructor(private httpClient: HttpClient) { }
+
+  ngOnInit(): void {
     this.httpClient.get(config.endpoint + '/events').subscribe({
-      next: (events: any) => this.events = events,
-      error: (err) => { alert(err.error) }
+      next: (events: any) =>{
+       this.events = events
+       this.spinner = false
+      },
+      error: (err) => { 
+        this.spinner = false
+        alert(err.error) 
+      }
     })
   }
 }
