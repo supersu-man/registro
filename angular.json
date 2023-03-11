@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "register-easy": {
+    "registro": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -56,10 +56,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "register-easy:build:production"
+              "browserTarget": "registro:build:production"
             },
             "development": {
-              "browserTarget": "register-easy:build:development"
+              "browserTarget": "registro:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -67,7 +67,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "register-easy:build"
+            "browserTarget": "registro:build"
           }
         },
         "test": {

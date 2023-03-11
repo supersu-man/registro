@@ -7,7 +7,7 @@ import { CommonService } from './services/common.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'register-easy';
+  title = 'registro';
   eventData = {}
 
   constructor(private commonService: CommonService) { }
