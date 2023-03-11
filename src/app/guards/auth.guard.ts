@@ -25,7 +25,6 @@ export class AuthGuard implements CanActivate {
       return false
     }
 
-
     this.httpClient.post(config.endpoint + '/event', { event: event_name }).subscribe({
       next: (event: any) => {
         if (decodeURI(state.url) != `/${event.name}/login`) {
@@ -44,8 +43,6 @@ export class AuthGuard implements CanActivate {
         this.router.navigate([''])
       }
     })
-
     return true
-
   }
 }

@@ -15,6 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { EventsComponent } from './events/events.component';
+import { SuperAdminComponent } from './super-admin/super-admin.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { EventsComponent } from './events/events.component';
     RegisterComponent,
     RegistrationsComponent,
     AddEventComponent,
-    EventsComponent
+    EventsComponent,
+    SuperAdminComponent
   ],
   imports: [
     BrowserModule,

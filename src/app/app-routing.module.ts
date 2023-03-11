@@ -9,17 +9,19 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RegistrationsComponent } from './registrations/registrations.component';
 import { ScanComponent } from './scan/scan.component';
+import { SuperAdminComponent } from './super-admin/super-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'events', pathMatch: 'full' },
   { path: 'about', component: HomeComponent },
   { path: 'add-event', component: AddEventComponent },
   { path: 'events', component: EventsComponent },
+  { path: 'super-admin', component: SuperAdminComponent },
   { path: ':event/login', component: LoginComponent, canActivate: [AuthGuard] },
   { path: ':event/dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: ':event/scan', component: ScanComponent, canActivate: [AuthGuard] },
   { path: ':event/register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: ':event/registrations', component: RegistrationsComponent, canActivate: [AuthGuard] },
+  { path: ':event/registrations', component: RegistrationsComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({

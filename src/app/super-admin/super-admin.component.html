@@ -1,0 +1,70 @@
+<div class="container h-100" *ngIf="!loggedin">
+    <div class="d-flex flex-column text-center h-100 py-5" [formGroup]="formData">
+        <div class="display-4 mb-2">Super Admin</div>
+        <input class="form-control my-2 mx-auto mt-auto" type="text" placeholder="Username" formControlName="username"
+            style="text-transform: lowercase;">
+        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
+        <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" (click)="login()" [disabled]="!formData.valid">
+            <div>Sign In</div>
+        </button>
+        <div class="mt-auto">App brought to you by</div>
+        <a class="fw-bold" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>
+    </div>
+</div>
+
+<div class="container h-100" *ngIf="loggedin">
+    <div class="d-flex flex-column h-100 py-5">
+        <div class="display-4">Super Admin</div>
+
+        <div class="fs-4 my-1 mt-3">All Events</div>
+        <div class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
+            *ngFor="let event of events | keyvalue" [routerLink]="'/'+event.key + '/login'">
+            <div class="d-flex">
+                <div class="fs-5">Event: {{event.key}}</div>
+                <button class="btn btn-dark ms-auto"
+                    (click)="removeEvent(event.key);$event.stopPropagation()">Remove</button>
+            </div>
+            <div>Description: {{ event.value.desc}}</div>
+            <div class="d-flex justify-content-evenly">
+                <div>Club/SIG: {{event.value.club_name}}</div>
+                <div>Date: {{event.value.date}}</div>
+                <div>Cost: {{event.value.date}}</div>
+            </div>
+        </div>
+
+        <div class="d-flex my-1 mt-4">
+            <div class="fs-4">All Admins</div>
+            <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">AddAdmin</button>
+        </div>
+        <div class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
+            *ngFor="let admin of admins | keyvalue">
+            <div class="d-flex">
+                <div class="fs-5">Admin: {{admin.key}}</div>
+                <button class="btn btn-dark ms-auto"
+                    (click)="removeAdmin(admin.key);$event.stopPropagation()">Remove</button>
+            </div>
+            <div>Club: {{ admin.value}}</div>
+        </div>
+        <div class="mt-auto text-center">App brought to you by</div>
+        <a class="fw-bold text-center" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: rgb(32, 32, 32);">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Admin and Club</h5>
+                <button class="btn btn-light" type="button" data-bs-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body" [formGroup]="adminForm">
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="username" formControlName="username"
+                    style="text-transform: lowercase;">
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="club" formControlName="club">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="addAdmin()" [disabled]="!adminForm.valid">Add Admin</button>
+            </div>
+        </div>
+    </div>
+</div>
