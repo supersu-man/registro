@@ -18,6 +18,8 @@ export class AddEventComponent {
     desc: new FormControl('', Validators.required),
     club_name: new FormControl('', Validators.required),
     stall: new FormControl(this.stall),
+    date: new FormControl('', Validators.required),
+    cost: new FormControl('', Validators.required),
     reg: new FormControl([]),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)

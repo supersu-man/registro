@@ -1,9 +1,17 @@
 <div class="container h-100">
     <div class="d-flex flex-column h-100 py-5" *ngIf="!spinner">
-        <a class="card bg-secondary p-3 my-2" *ngFor="let event of events | keyvalue" [href]="event.key+'/login'">
-            <div class="fs-5">{{event.key}}</div>
-            <div>{{ event.value.desc}}</div>
-            <div>by {{event.value.club_name}}</div>
+        <div class="display-4">Events</div>
+        <a class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
+            *ngFor="let event of events | keyvalue" [routerLink]="'/'+event.key + '/login'">
+            <div class="d-flex">
+                <div class="fs-5">Event: {{event.key}}</div>
+            </div>
+            <div>Description: {{ event.value.desc}}</div>
+            <div class="d-flex justify-content-evenly">
+                <div>Club/SIG: {{event.value.club_name}}</div>
+                <div>Date: {{event.value.date}}</div>
+                <div>Cost: {{event.value.cost}}</div>
+            </div>
         </a>
         <label class="mt-auto text-center">App brought to you by</label>
         <a class="fw-bold text-center" href="https://supersu-man.github.io/">Sumanth Perambuduri</a>
