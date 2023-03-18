@@ -12,7 +12,7 @@ import { ScanComponent } from './scan/scan.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'events', pathMatch: 'full' },
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
   { path: 'about', component: HomeComponent },
   { path: 'add-event', component: AddEventComponent },
   { path: 'events', component: EventsComponent },
