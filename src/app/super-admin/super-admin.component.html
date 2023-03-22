@@ -25,10 +25,13 @@
                     (click)="removeEvent(event.key);$event.stopPropagation()">Remove</button>
             </div>
             <div>Description: {{ event.value.desc}}</div>
-            <div class="d-flex justify-content-evenly">
-                <div>Club/SIG: {{event.value.club_name}}</div>
-                <div>Date: {{event.value.date}}</div>
-                <div>Cost: {{event.value.date}}</div>
+            <div class="row row-cols-auto">
+                <div class="col">Club/SIG: {{event.value.club}}</div>
+                <div class="col">Start date: {{event.value.sdate}}</div>
+                <div class="col">End date: {{event.value.edate}}</div>
+                <div class="col">Cost: {{event.value.cost}}</div>
+                <div class="col">Campus: {{event.value.campus}}</div>
+                <div class="col">Venue: {{event.value.venue}}</div>
             </div>
         </div>
 

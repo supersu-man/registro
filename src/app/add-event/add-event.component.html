@@ -1,31 +1,47 @@
 <div class="container h-100 py-5">
     <div class="display-4">Add a new event</div>
-    <div class="row" [formGroup]="formData">
+    <div class="row pt-4" [formGroup]="formData">
         <div class="col">
-            <div class="fs-4">Event Name: </div>
-            <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="name">
-            <div class="fs-4">Event Description: </div>
-            <textarea class="fs-5 mb-3" type="text" maxlength="80" style="min-height: 100px;"
+            <div class="fs-4">Event name: </div>
+            <input class="fs-5 mb-3" type="text" maxlength="30" formControlName="name">
+            <div class="fs-4">Event description: </div>
+            <textarea class="fs-5 mb-3" type="text" maxlength="150" style="min-height: 100px;"
                 formControlName="desc"> </textarea>
-            <div class="fs-4">Club name: </div>
-            <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="club_name">
+            <div class="fs-4">Campus: </div>
+            <button class="btn btn-light dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown">
+                {{formData.controls.campus.value}}
+            </button>
+            <ul class="dropdown-menu primary-text">
+                <li class="dropdown-item" (click)="formData.controls.campus.setValue('Hyderabad')">Hyderabad</li>
+                <li class="dropdown-item" (click)="formData.controls.campus.setValue('Bangalore')">Bangalore</li>
+                <li class="dropdown-item" (click)="formData.controls.campus.setValue('Visakhapatnam')">Visakhapatnam
+                </li>
+            </ul>
+            <div class="fs-4">Venue: </div>
+            <input class="fs-5 mb-3" type="text" maxlength="30" formControlName="venue">
         </div>
         <div class="col">
-            <label class="fs-4">Stall accounts:</label>
+            <div class="fs-4">Event start date: </div>
+            <input class="fs-5 mb-3" type="date" maxlength="20" formControlName="sdate">
+            <div class="fs-4">Event end date: </div>
+            <input class="fs-5 mb-3" type="date" maxlength="20" formControlName="edate">
+            <div class="fs-4">Stall accounts:</div>
             <div class="mb-1">
                 <button class="btn btn-light m-1" *ngFor="let account of stall; let i = index"
                     (click)="stall.splice(i, 1)">{{account}}</button>
             </div>
             <input class="fs-5 mb-3" type="text" (keyup.Enter)="add_account($event.target)"
                 style="text-transform: lowercase;">
-            <div class="fs-4">Event Date: </div>
-            <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="date">
+
             <div class="fs-4">Cost: </div>
-            <input class="fs-5 mb-3" type="text" maxlength="20" formControlName="cost">
+            <input class="fs-5 mb-3" type="number" maxlength="20" formControlName="cost">
         </div>
     </div>
-    <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" data-bs-toggle="modal"
-        data-bs-target="#staticBackdrop">Add Event</button>
+    <div class="d-flex">
+        <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" data-bs-toggle="modal"
+            data-bs-target="#staticBackdrop">Add Event</button>
+    </div>
+
 </div>
 
 
@@ -39,7 +55,7 @@
             <div class="modal-body" [formGroup]="formData">
                 <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="Username" formControlName="username"
                     style="text-transform: lowercase;">
-                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="Password" formControlName="password">
+                <input class="fs-5 mb-3" type="password" maxlength="20" placeholder="Password" formControlName="password">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" (click)="add_event()">

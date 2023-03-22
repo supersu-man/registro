@@ -16,10 +16,12 @@ export class AddEventComponent {
   formData = new FormGroup({
     name: new FormControl('', Validators.required),
     desc: new FormControl('', Validators.required),
-    club_name: new FormControl('', Validators.required),
+    campus: new FormControl('Hyderabad', Validators.required),
     stall: new FormControl(this.stall),
-    date: new FormControl('', Validators.required),
+    sdate: new FormControl('', Validators.required),
+    edate: new FormControl('', Validators.required),
     cost: new FormControl('', Validators.required),
+    venue: new FormControl('', Validators.required),
     reg: new FormControl([]),
     username: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required)
@@ -28,13 +30,15 @@ export class AddEventComponent {
   constructor(private httpClient: HttpClient) { }
 
   add_account(target: any) {
-    if (this.stall.length == 5) alert('Only 5 Admin accounts allowed')
-    else if (target.value.trim() == '') alert('Admin account cannot be empty')
+    if (this.stall.length == 5) alert('Only 5 Stall accounts allowed')
+    else if (target.value.trim() == '') alert('Stall account cannot be empty')
     else this.stall.push(target.value.trim())
     target.value = ''
   }
 
   add_event() {
+    console.log(this.formData)
+    debugger
     if (!this.formData.valid) {
       alert('Fill the form')
       return
