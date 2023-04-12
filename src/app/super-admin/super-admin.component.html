@@ -1,9 +1,9 @@
 <div class="container h-100" *ngIf="!loggedin">
     <div class="d-flex flex-column text-center h-100 py-5" [formGroup]="formData">
         <div class="display-4 mb-2">Super Admin</div>
-        <input class="form-control my-2 mx-auto mt-auto" type="text" placeholder="Username" formControlName="username"
-            style="text-transform: lowercase;">
-        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
+        <input class="form-control my-2 mx-auto mt-auto" type="text" placeholder="Username" formControlName="$username"
+        oninput="this.value = this.value.toLowerCase()">
+        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="$password">
         <button class="btn btn-light my-3 fw-bold mx-auto border-0 mb-auto" (click)="login()" [disabled]="!formData.valid">
             <div>Sign In</div>
         </button>
@@ -16,38 +16,52 @@
     <div class="d-flex flex-column h-100 py-5">
         <div class="display-4">Super Admin</div>
 
-        <div class="fs-4 my-1 mt-3">All Events</div>
+        <div class="fs-4 my-1 mt-3">Events</div>
         <div class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
-            *ngFor="let event of events | keyvalue" [routerLink]="'/'+event.key + '/login'">
+            *ngFor="let event of events" [routerLink]="'/'+event.slug + '/login'">
             <div class="d-flex">
-                <div class="fs-5">Event: {{event.key}}</div>
+                <div class="fs-5">Event: {{event.name}}</div>
                 <button class="btn btn-dark ms-auto"
-                    (click)="removeEvent(event.key);$event.stopPropagation()">Remove</button>
+                    (click)="removeEvent(event.eid);$event.stopPropagation()">Remove</button>
             </div>
-            <div>Description: {{ event.value.desc}}</div>
+            <div>Description: {{ event.desc}}</div>
             <div class="row row-cols-auto">
-                <div class="col">Club/SIG: {{event.value.club}}</div>
-                <div class="col">Start date: {{event.value.sdate}}</div>
-                <div class="col">End date: {{event.value.edate}}</div>
-                <div class="col">Cost: {{event.value.cost}}</div>
-                <div class="col">Campus: {{event.value.campus}}</div>
-                <div class="col">Venue: {{event.value.venue}}</div>
+                <div class="col">Club/SIG: {{event.club}}</div>
+                <div class="col">Start date: {{event.sdate}}</div>
+                <div class="col">End date: {{event.edate}}</div>
+                <div class="col">Cost: {{event.cost}}</div>
+                <div class="col">Campus: {{event.campus}}</div>
+                <div class="col">Venue: {{event.venue}}</div>
             </div>
         </div>
 
         <div class="d-flex my-1 mt-4">
-            <div class="fs-4">All Admins</div>
-            <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">AddAdmin</button>
+            <div class="fs-4">Clubs</div>
+            <button class="btn btn-light ms-auto" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add Club</button>
         </div>
         <div class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
-            *ngFor="let admin of admins | keyvalue">
+            *ngFor="let club of clubs">
             <div class="d-flex">
-                <div class="fs-5">Admin: {{admin.key}}</div>
+                <div class="fs-5">Name: {{club.name}}</div>
                 <button class="btn btn-dark ms-auto"
-                    (click)="removeAdmin(admin.key);$event.stopPropagation()">Remove</button>
+                    (click)="removeClub(club.cid);$event.stopPropagation()">Remove</button>
             </div>
-            <div>Club: {{ admin.value}}</div>
+            <div>Campus: {{ club.campus}}</div>
+            <div>Campus: {{ club.username}}</div>
         </div>
+
+        <div class="fs-4 my-1 mt-3">Users</div>
+        <div class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
+            *ngFor="let user of users">
+            <div class="d-flex">
+                <div class="fs-5">Username: {{user.username}}</div>
+                <button class="btn btn-dark ms-auto"
+                    (click)="removeEvent(user.username);$event.stopPropagation()">Remove</button>
+            </div>
+            <div>Name: {{ user.name}}</div>
+            <div>Password: {{ user.password}}</div>
+        </div>
+
     </div>
 </div>
 
@@ -58,13 +72,25 @@
                 <h5 class="modal-title" id="staticBackdropLabel">Admin and Club</h5>
                 <button class="btn btn-light" type="button" data-bs-dismiss="modal">X</button>
             </div>
-            <div class="modal-body" [formGroup]="adminForm">
-                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="username" formControlName="username"
-                    style="text-transform: lowercase;">
-                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="club" formControlName="club">
+            <div class="modal-body" [formGroup]="clubForm">
+                <div class="fs-4">Club name: </div>
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="club" formControlName="$name">
+                <div class="fs-4">Campus: </div>
+                <button class="btn btn-light dropdown-toggle mb-3" type="button" data-bs-toggle="dropdown">
+                    {{clubForm.controls.$campus.value}}
+                </button>
+                <ul class="dropdown-menu primary-text">
+                    <li class="dropdown-item" (click)="clubForm.controls.$campus.setValue('Hyderabad')">Hyderabad</li>
+                    <li class="dropdown-item" (click)="clubForm.controls.$campus.setValue('Bangalore')">Bangalore</li>
+                    <li class="dropdown-item" (click)="clubForm.controls.$campus.setValue('Visakhapatnam')">Visakhapatnam
+                    </li>
+                    <li class="dropdown-item" (click)="clubForm.controls.$campus.setValue('All')">All</li>
+                </ul>
+                <div class="fs-4">Admin: </div>
+                <input class="fs-5 mb-3" type="text" maxlength="20" placeholder="username" formControlName="$username" oninput="this.value = this.value.toLowerCase()">
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="addAdmin()" [disabled]="!adminForm.valid">Add Admin</button>
+                <button type="button" class="btn btn-light" data-bs-dismiss="modal" (click)="addClub()" [disabled]="!clubForm.valid">Add Club</button>
             </div>
         </div>
     </div>

@@ -16,30 +16,33 @@ export class AuthGuard implements CanActivate {
     const userdata: any = JSON.parse(localStorage.getItem('userdata')!) || undefined
     this.commonService.userData = userdata
 
-    this.commonService.updateEvent(undefined)
-    const event_name = route.paramMap.get('event') as string
+    console.log(userdata)
 
-    if (decodeURI(state.url) != `/${event_name}/login` && !userdata) {
+    this.commonService.updateEvent(undefined)
+    const eventSlug = route.paramMap.get('event') as string
+
+    //if user is not signed in, redirects to login
+    if (state.url != `/${eventSlug}/login` && !userdata) {
+      console.log(state.url)
       alert('User not signed in')
-      this.router.navigate([`${event_name}/login`])
+      this.router.navigate([`${eventSlug}/login`])
       return false
     }
 
-    this.httpClient.post(config.endpoint + '/event', { event: event_name }).subscribe({
+    this.httpClient.post(config.endpoint + '/event-info', { $slug: eventSlug, $username: userdata?.username || '' }).subscribe({
       next: (event: any) => {
-        if (decodeURI(state.url) != `/${event.name}/login`) {
-          if (decodeURI(state.url) != `/${event.name}/dashboard` && !event.stall.includes(userdata.username)) {
-            alert('Only stall accounts are permitted')
-            this.router.navigate([`${event.name}/dashboard`])
-          } else if (!event.reg.includes(userdata.username) && !event.stall.includes(userdata.username)) {
-            alert('User not registered for the event, register at stall')
-            this.router.navigate([`${event.name}/login`])
-          }
+        if (!event.slug) this.router.navigate([`/events`])
+        else if (state.url.endsWith('login')) { }
+        else if (!state.url.endsWith(`dashboard`) && event.admin != userdata?.username)
+          this.router.navigate([`${event.slug}/dashboard`])
+        else if (event.admin != userdata?.username && event.username != userdata?.username) {
+          alert('User not registered for the event, register at stall')
+          this.router.navigate([`${event.slug}/login`])
         }
         this.commonService.updateEvent(event)
       },
       error: (err) => {
-        alert('Event doesnt exist')
+        alert(err.error)
         this.router.navigate([''])
       }
     })

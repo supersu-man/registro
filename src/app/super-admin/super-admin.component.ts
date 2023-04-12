@@ -11,29 +11,33 @@ import * as config from 'src/config';
 export class SuperAdminComponent implements OnInit {
 
   events: undefined
-  admins: undefined
-  loggedin = false
+  users: undefined
+  clubs: undefined
+  loggedin = true
 
   formData = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    $username: new FormControl('', Validators.required),
+    $password: new FormControl('', Validators.required)
   })
 
-  adminForm = new FormGroup({
-    username: new FormControl('', Validators.required),
-    club: new FormControl('', Validators.required)
+  clubForm = new FormGroup({
+    $name: new FormControl('', Validators.required),
+    $campus: new FormControl('All', Validators.required),
+    $username: new FormControl('', Validators.required)
   })
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.getUsers()
+   }
 
   login() {
     if (!this.formData.valid) return
     this.httpClient.post(config.endpoint + '/super-admin', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
         this.getEvents()
-        this.getAdmins()
+        this.getClubs()
         this.loggedin = true
       },
       error: (e) => {
@@ -42,37 +46,51 @@ export class SuperAdminComponent implements OnInit {
     })
   }
 
-  addAdmin() {
-    this.httpClient.post(config.endpoint + '/add-admin', this.adminForm.getRawValue()).subscribe({
-      next: (res) => this.getAdmins(),
+
+  getUsers() {
+    this.httpClient.get(config.endpoint + '/get-users').subscribe({
+      next: (users: any) => {
+        this.users = users;
+        console.log(users);
+      },
       error: (err) => alert(err.error)
     })
   }
 
   getEvents() {
-    this.httpClient.get(config.endpoint + '/events').subscribe({
+    this.httpClient.get(config.endpoint + '/get-events').subscribe({
       next: (events: any) => this.events = events,
       error: (err) => alert(err.error)
     })
   }
 
-  getAdmins() {
-    this.httpClient.get(config.endpoint + '/admins').subscribe({
-      next: (admins: any) => this.admins = admins,
-      error: (err) => alert(err.error)
-    })
-  }
-
-  removeEvent(event: any) {
-    this.httpClient.post(config.endpoint + '/remove-event', { event: event }).subscribe({
+  removeEvent(eid: any) {
+    this.httpClient.post(config.endpoint + '/remove-event', { $eid: eid }).subscribe({
       next: (res) => this.getEvents(),
       error: (err) => alert(err.error)
     })
   }
 
-  removeAdmin(admin: any) {
-    this.httpClient.post(config.endpoint + '/remove-admin', { admin: admin }).subscribe({
-      next: (res) => this.getAdmins(),
+  addClub() {
+    this.httpClient.post(config.endpoint + '/add-club', this.clubForm.getRawValue()).subscribe({
+      next: (res) => this.getClubs(),
+      error: (err) => alert(err.error)
+    })
+  }
+
+  getClubs() {
+    this.httpClient.get(config.endpoint + '/get-clubs').subscribe({
+      next: (clubs: any) => {
+        this.clubs = clubs
+        console.log(clubs)
+      },
+      error: (err) => alert(err.error)
+    })
+  }
+
+  removeClub(cid: any) {
+    this.httpClient.post(config.endpoint + '/remove-club', { $cid: cid }).subscribe({
+      next: (res) => this.getClubs(),
       error: (err) => alert(err.error)
     })
   }

@@ -16,22 +16,23 @@ export class RegisterComponent {
   eventData = this.commonService.eventData
 
   formData = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    stall: new FormControl(this.userdata?.username, Validators.required),
-    event: new FormControl(this.eventData?.name, Validators.required)
+    $username: new FormControl('', Validators.required),
+    $password: new FormControl('', Validators.required),
+    $eid: new FormControl(this.eventData?.eid, Validators.required)
   })
 
   constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
 
   register() {
+    console.log(this.formData.getRawValue())
+    debugger
     if (!this.formData.valid) return
     this.spinner = true
     this.httpClient.post(config.endpoint + '/register', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
         alert('Registration successful')
         this.spinner = false
-        this.router.navigate([this.eventData.name + '/dashboard'])
+        this.router.navigate([this.eventData.slug + '/dashboard'])
       },
       error: (e) => {
         alert(e.error)

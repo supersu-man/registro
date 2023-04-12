@@ -19,7 +19,7 @@ export class ScanComponent {
     if (!qr.includes('|')) {
       alert('Invalid QR')
       return
-    } else if (qr.split('|')[0] != this.eventData.name) {
+    } else if (qr.split('|')[0] != this.eventData.slug) {
       alert('Mismatched events')
       return
     }

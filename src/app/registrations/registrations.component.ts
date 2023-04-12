@@ -10,8 +10,7 @@ import { CommonService } from '../services/common.service';
 })
 export class RegistrationsComponent implements OnInit {
 
-  reg: any
-  stall: any
+  registrations: any
   searchKey = ''
 
   eventData = this.commonService.eventData
@@ -19,10 +18,10 @@ export class RegistrationsComponent implements OnInit {
   constructor(private httpClient: HttpClient, private commonService: CommonService) { }
 
   ngOnInit() {
-    this.httpClient.post(`${config.endpoint}/registrations`, { event: this.eventData.name }).subscribe({
+    this.httpClient.post(`${config.endpoint}/get-registrations`, { $eid: this.eventData.eid }).subscribe({
       next: (res: any) => {
-        this.reg = res.reg
-        this.stall = res.stall
+        console.log(res)
+        this.registrations = res
       },
       error: (err) => {
         alert(err.error)

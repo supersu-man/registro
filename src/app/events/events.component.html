@@ -2,18 +2,18 @@
     <div class="d-flex flex-column h-100 py-5" *ngIf="!spinner">
         <div class="display-4">Events</div>
         <a class="card d-flex p-3 my-2" style="background-color: rgb(70, 70, 70);"
-            *ngFor="let event of events | keyvalue" [routerLink]="'/'+event.key + '/login'">
+            *ngFor="let event of events" [routerLink]="'/'+event.slug + '/login'">
             <div class="d-flex">
-                <div class="fs-5">Event: {{event.key}}</div>
+                <div class="fs-5">Event: {{event.name}}</div>
             </div>
-            <div>Description: {{ event.value.desc}}</div>
+            <div>Description: {{ event.desc}}</div>
             <div class="row row-cols-auto">
-                <div class="col">Club/SIG: {{event.value.club}}</div>
-                <div class="col">Start date: {{event.value.sdate}}</div>
-                <div class="col">End date: {{event.value.edate}}</div>
-                <div class="col">Cost: {{event.value.cost}}</div>
-                <div class="col">Campus: {{event.value.campus}}</div>
-                <div class="col">Venue: {{event.value.venue}}</div>
+                <div class="col">Club/SIG: {{event.club}}</div>
+                <div class="col">Start date: {{event.sdate}}</div>
+                <div class="col">End date: {{event.edate}}</div>
+                <div class="col">Cost: {{event.cost}}</div>
+                <div class="col">Campus: {{event.campus}}</div>
+                <div class="col">Venue: {{event.venue}}</div>
             </div>
         </a>
     </div>

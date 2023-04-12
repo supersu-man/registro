@@ -4,8 +4,8 @@
         <label class="fs-2">{{eventData.club}}</label>
         <label class="my-1">presents</label>
         <label class="fs-2 mb-4">{{eventData.name}}</label>
-        <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="username" style="text-transform: lowercase;">
-        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="password">
+        <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="$username" oninput="this.value = this.value.toLowerCase()">
+        <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="$password">
         <small class="my-2">Note: Use GITAM student portal credentials.</small>
         <button class="btn btn-light my-3 fw-bold mx-auto border-0" (click)="register()">
             <div *ngIf="!spinner">Register</div>

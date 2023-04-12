@@ -1,31 +1,31 @@
 <div class="container h-100" >
     <div class="d-flex flex-column h-100 py-5">
         <div class="d-flex">
-            <div class="fs-2">{{userdata.fullname}}</div>
+            <div class="fs-2">{{userdata.name}}</div>
             <img class="ms-auto my-auto" src="assets/imgs/logout1.png" height="30" width="30" (click)="logout()"
                 style="cursor: pointer;">
         </div>
-        <div *ngIf="eventData.stall.includes(userdata.username)">Stall Account</div>
+        <div *ngIf="eventData.admin == userdata.username">Admin Account</div>
         <div>{{time}} </div>
         <div class="card d-flex flex-column mt-3 p-3 mx-auto">
             <div class="me-auto mb-0 fs-3 text-black">{{eventData.name}}</div>
-            <qr-code class="m-auto" [value]="eventData.name + '|' +userdata.username" size="220"
+            <qr-code class="m-auto" [value]="eventData.slug + '|' +userdata.username" size="220"
                 errorCorrectionLevel="M"></qr-code>
         </div>
-        <div class="d-flex justify-content-evenly pt-3" *ngIf="eventData.stall.includes(userdata.username)">
-            <a [href]="eventData.name +'/scan'" style="width: 80px;">
+        <div class="d-flex justify-content-evenly pt-3" *ngIf="eventData.admin == userdata.username">
+            <a [href]="eventData.slug +'/scan'" style="width: 80px;">
                 <div class="rounded-circle bg-secondary d-flex m-auto" style="height:60px; width:60px;">
                     <img class="m-auto pt-1" src="assets/imgs/scan.png" height="50">
                 </div>
                 <div class="text-center">Scan QR</div>
             </a>
-            <a [href]="eventData.name +'/register'">
+            <a [href]="eventData.slug +'/register'">
                 <div class="rounded-circle bg-secondary d-flex m-auto" style="height:60px; width:60px;">
                     <img class="m-auto pt-1 ps-2" src="assets/imgs/register.png" height="48">
                 </div>
                 <div class="text-center">Register</div>
             </a>
-            <a [href]="eventData.name +'/registrations'">
+            <a [href]="eventData.slug +'/registrations'">
                 <div class="rounded-circle bg-secondary d-flex m-auto" style="height:60px; width:60px;">
                     <img class="m-auto pt-1" src="assets/imgs/customer.png" height="45">
                 </div>

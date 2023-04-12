@@ -13,8 +13,9 @@ export class EventsComponent implements OnInit {
   constructor(private httpClient: HttpClient) { }
 
   ngOnInit(): void {
-    this.httpClient.get(config.endpoint + '/events').subscribe({
+    this.httpClient.get(config.endpoint + '/get-events').subscribe({
       next: (events: any) =>{
+        console.log(events)
        this.events = events
        this.spinner = false
       },

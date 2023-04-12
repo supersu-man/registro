@@ -16,20 +16,20 @@ export class LoginComponent {
   eventData = this.commonService.eventData
 
   formData = new FormGroup({
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required),
-    event: new FormControl(this.eventData?.name, Validators.required)
+    $username: new FormControl('', Validators.required),
+    $password: new FormControl('', Validators.required),
   })
 
   constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
 
-  login() {    
-    if (!this.formData.valid) return
+  login() {
     this.spinner = true
     this.httpClient.post(config.endpoint + '/login', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
+        console.log(res)
+        debugger
         localStorage.setItem('userdata', JSON.stringify(res))
-        this.router.navigate([this.eventData.name + '/dashboard'])
+        this.router.navigate([this.eventData.slug + '/dashboard'])
         this.spinner = false
       },
       error: (e) => {

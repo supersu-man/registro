@@ -14,35 +14,31 @@ export class AddEventComponent {
   spinner = false
 
   formData = new FormGroup({
-    name: new FormControl('', Validators.required),
-    desc: new FormControl('', Validators.required),
-    campus: new FormControl('Hyderabad', Validators.required),
-    stall: new FormControl(this.stall),
-    sdate: new FormControl('', Validators.required),
-    edate: new FormControl('', Validators.required),
-    cost: new FormControl('', Validators.required),
-    venue: new FormControl('', Validators.required),
-    reg: new FormControl([]),
-    username: new FormControl('', Validators.required),
-    password: new FormControl('', Validators.required)
+    $slug: new FormControl('', Validators.required),
+    $name: new FormControl('', Validators.required),
+    $desc: new FormControl('', Validators.required),
+    $campus: new FormControl('All', Validators.required),
+    //$stall: new FormControl(this.stall),
+    $sdate: new FormControl('', Validators.required),
+    $edate: new FormControl('', Validators.required),
+    $cost: new FormControl('', Validators.required),
+    $venue: new FormControl('', Validators.required),
+    $username: new FormControl('', Validators.required),
+    $password: new FormControl('', Validators.required)
   })
 
   constructor(private httpClient: HttpClient) { }
 
   add_account(target: any) {
-    if (this.stall.length == 5) alert('Only 5 Stall accounts allowed')
+    if (this.stall.length >= 5) alert('Only 5 Stall accounts allowed')
     else if (target.value.trim() == '') alert('Stall account cannot be empty')
     else this.stall.push(target.value.trim())
     target.value = ''
   }
 
   add_event() {
-    console.log(this.formData)
-    debugger
-    if (!this.formData.valid) {
-      alert('Fill the form')
-      return
-    }
+    console.log(this.formData.getRawValue())
+    if (!this.formData.valid) return alert('Form data is invalid')
     this.spinner = true
     this.httpClient.post(config.endpoint + '/add-event', this.formData.getRawValue()).subscribe({
       next: (res) => {
