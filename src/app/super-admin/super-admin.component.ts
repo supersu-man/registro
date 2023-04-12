@@ -13,7 +13,7 @@ export class SuperAdminComponent implements OnInit {
   events: undefined
   users: undefined
   clubs: undefined
-  loggedin = true
+  loggedin = false
 
   formData = new FormGroup({
     $username: new FormControl('', Validators.required),
@@ -28,9 +28,7 @@ export class SuperAdminComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void {
-    this.getUsers()
-   }
+  ngOnInit(): void {}
 
   login() {
     if (!this.formData.valid) return
