@@ -16,14 +16,11 @@ export class AuthGuard implements CanActivate {
     const userdata: any = JSON.parse(localStorage.getItem('userdata')!) || undefined
     this.commonService.userData = userdata
 
-    console.log(userdata)
-
     this.commonService.updateEvent(undefined)
     const eventSlug = route.paramMap.get('event') as string
 
     //if user is not signed in, redirects to login
     if (state.url != `/${eventSlug}/login` && !userdata) {
-      console.log(state.url)
       alert('User not signed in')
       this.router.navigate([`${eventSlug}/login`])
       return false

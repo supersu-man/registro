@@ -20,7 +20,6 @@ export class RegistrationsComponent implements OnInit {
   ngOnInit() {
     this.httpClient.post(`${config.endpoint}/get-registrations`, { $eid: this.eventData.eid }).subscribe({
       next: (res: any) => {
-        console.log(res)
         this.registrations = res
       },
       error: (err) => {

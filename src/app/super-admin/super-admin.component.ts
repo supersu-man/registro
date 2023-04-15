@@ -36,6 +36,7 @@ export class SuperAdminComponent implements OnInit {
       next: (res: any) => {
         this.getEvents()
         this.getClubs()
+        this.getUsers()
         this.loggedin = true
       },
       error: (e) => {
@@ -49,7 +50,6 @@ export class SuperAdminComponent implements OnInit {
     this.httpClient.get(config.endpoint + '/get-users').subscribe({
       next: (users: any) => {
         this.users = users;
-        console.log(users);
       },
       error: (err) => alert(err.error)
     })
@@ -80,7 +80,6 @@ export class SuperAdminComponent implements OnInit {
     this.httpClient.get(config.endpoint + '/get-clubs').subscribe({
       next: (clubs: any) => {
         this.clubs = clubs
-        console.log(clubs)
       },
       error: (err) => alert(err.error)
     })

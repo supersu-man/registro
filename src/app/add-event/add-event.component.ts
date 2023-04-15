@@ -37,7 +37,6 @@ export class AddEventComponent {
   }
 
   add_event() {
-    console.log(this.formData.getRawValue())
     if (!this.formData.valid) return alert('Form data is invalid')
     this.spinner = true
     this.httpClient.post(config.endpoint + '/add-event', this.formData.getRawValue()).subscribe({

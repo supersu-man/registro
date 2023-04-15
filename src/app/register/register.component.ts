@@ -24,8 +24,6 @@ export class RegisterComponent {
   constructor(private httpClient: HttpClient, private router: Router, private commonService: CommonService) { }
 
   register() {
-    console.log(this.formData.getRawValue())
-    debugger
     if (!this.formData.valid) return
     this.spinner = true
     this.httpClient.post(config.endpoint + '/register', this.formData.getRawValue()).subscribe({

@@ -26,8 +26,6 @@ export class LoginComponent {
     this.spinner = true
     this.httpClient.post(config.endpoint + '/login', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
-        console.log(res)
-        debugger
         localStorage.setItem('userdata', JSON.stringify(res))
         this.router.navigate([this.eventData.slug + '/dashboard'])
         this.spinner = false

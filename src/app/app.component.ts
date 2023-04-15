@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
     this.commonService.eventDataUpdated.subscribe({
       next: (eventData) => {
         this.eventData = eventData
-        console.log(eventData)
       }
     })
   }
