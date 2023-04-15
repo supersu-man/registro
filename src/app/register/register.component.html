@@ -1,15 +1,13 @@
 <div class="container h-100">
-    <div class="d-flex flex-column text-center h-100 py-5" [formGroup]="formData">
-        <label class="display-4 mb-2">Registration</label>
-        <label class="fs-2">{{eventData.club}}</label>
-        <label class="my-1">presents</label>
-        <label class="fs-2 mb-4">{{eventData.name}}</label>
+    <div class="d-flex flex-column h-100 py-5" [formGroup]="formData">
+        <label class="display-4 mb-auto">Registration</label>
         <input class="form-control my-2 mx-auto" type="text" placeholder="Username" formControlName="$username" oninput="this.value = this.value.toLowerCase()">
         <input class="form-control my-2 mx-auto" type="password" placeholder="Password" formControlName="$password">
-        <small class="my-2">Note: Use GITAM student portal credentials.</small>
-        <button class="btn btn-light my-3 fw-bold mx-auto border-0" (click)="register()">
+        <small class="my-2 mx-auto">Note: Use GITAM student portal credentials.</small>
+        <button class="btn btn-light my-3 fw-bold mx-auto border-0" (click)="register()" [disabled]="!formData.valid">
             <div *ngIf="!spinner">Register</div>
             <div *ngIf="spinner" class="spinner-border spinner-border-sm"></div>
         </button>
+        <label class="fs-2 m-auto">Event: {{eventData.name}}</label>
     </div>
 </div>
