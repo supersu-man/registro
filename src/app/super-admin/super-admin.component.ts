@@ -28,15 +28,19 @@ export class SuperAdminComponent implements OnInit {
 
   constructor(private httpClient: HttpClient) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  getData() {
+    this.getEvents()
+    this.getClubs()
+    this.getUsers()
+  }
 
   login() {
     if (!this.formData.valid) return
     this.httpClient.post(config.endpoint + '/super-admin', this.formData.getRawValue()).subscribe({
       next: (res: any) => {
-        this.getEvents()
-        this.getClubs()
-        this.getUsers()
+        this.getData()
         this.loggedin = true
       },
       error: (e) => {
@@ -44,7 +48,6 @@ export class SuperAdminComponent implements OnInit {
       }
     })
   }
-
 
   getUsers() {
     this.httpClient.get(config.endpoint + '/get-users').subscribe({
@@ -78,16 +81,14 @@ export class SuperAdminComponent implements OnInit {
 
   getClubs() {
     this.httpClient.get(config.endpoint + '/get-clubs').subscribe({
-      next: (clubs: any) => {
-        this.clubs = clubs
-      },
+      next: (clubs: any) => this.clubs = clubs,
       error: (err) => alert(err.error)
     })
   }
 
   removeClub(cid: any) {
     this.httpClient.post(config.endpoint + '/remove-club', { $cid: cid }).subscribe({
-      next: (res) => this.getClubs(),
+      next: (res) => this.getData(),
       error: (err) => alert(err.error)
     })
   }

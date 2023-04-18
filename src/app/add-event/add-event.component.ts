@@ -18,7 +18,6 @@ export class AddEventComponent {
     $name: new FormControl('', Validators.required),
     $desc: new FormControl('', Validators.required),
     $campus: new FormControl('All', Validators.required),
-    //$stall: new FormControl(this.stall),
     $sdate: new FormControl('', Validators.required),
     $edate: new FormControl('', Validators.required),
     $cost: new FormControl('', Validators.required),
